@@ -15,40 +15,52 @@ const courses = [
     'Web разработка'
 ];
 
-const submitForm = () => {
+const submitForm = async () => {
+Object.keys(form).forEach(key => {
+//   console.log(`Ключ: ${key}, Значение: ${form[key]}`);
+if (!form[key]){
+    console.log(key);
+    
+}
+})
+    // let req_body = {
+    //     title: "Новая заявка", // Заголовок письма
+    //     body: form,
+    //     apiKey: "VmsveCwkahmAI2B3"
+    // }
+    // req_body.body.consent = req_body.body.consent ? 'да' : 'нет'
+    // console.log(req_body)
+    // let response = await fetch("https://api.formtomail.ru/send", {
+    //     method: "POST",
+    //     mode: "cors",
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify(req_body)
+    // });
 
-    console.log(
-        form
-    )
+    // let body = await response.json();
+    // if (body.statusCode == 200) {
+    //     snackbar.value = true
+    // }
+    // console.log(body.statusCode);
+
 };
 
+import { ref } from 'vue'
 
-let response = await fetch("https://api.formtomail.ru/send", {
-    method: "POST",
-    mode: "cors",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        title: "Новая заявка", // Заголовок письма
-        body: {   // Содержимое формы (можно прислать HTML)
-            "Имя": "значение поля",
-            "Телефон": "значение поля"
-        },
-        apiKey: "VmsveCwkahmAI2B3"
-    })
-});
-let body = await response.json();
+const snackbar = ref(false)
+const snackbar1 = ref(true)
 
 </script>
 
 <template>
     <v-container>
         <v-row class="d-flex justify-center">
-            <v-col  cols="12" md="6" sm="8" lg="4">
+            <v-col cols="12" md="6" sm="8" lg="4">
                 <v-card class=" pa-4 pa-md-8">
 
-                    <h3 class="text-center"color="error">Запись</h3>
+                    <h3 class="text-center" color="error">Запись</h3>
 
 
                     <v-text-field type="text" v-model="form.fullName" placeholder="Фамилия Имя" />
@@ -70,6 +82,42 @@ let body = await response.json();
                             Записаться
                         </v-btn>
                     </div>
+
+
+                    <!-- <div class="text-center orange-darken-2">
+
+
+                        <v-snackbar v-model="snackbar" vertical>
+                            <div class="text-subtitle-1 pb-2">Вы зарегестрировались!</div>
+
+                            <p>Ждите звонка!</p>
+
+                            <template v-slot:actions>
+                                <v-btn color="indigo" variant="text" @click="snackbar = false">
+                                    Close
+                                </v-btn>
+                            </template>
+                        </v-snackbar>
+                    </div> -->
+
+
+<div class="text-center orange-darken-2">
+
+
+                        <v-snackbar v-model="snackbar1" vertical>
+                            <div class="text-subtitle-1 pb-2">Введите поле!</div>
+
+                            <!-- <p>Поле нужно ввести</p> -->
+
+                            <template v-slot:actions>
+                                <v-btn color="indigo" variant="text" @click="snackbar = false">
+                                    Close
+                                </v-btn>
+                            </template>
+                        </v-snackbar>
+                    </div>
+
+
 
                 </v-card>
             </v-col>
